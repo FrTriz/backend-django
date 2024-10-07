@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'toys.apps.ToysConfig'
+    'toys.apps.ToysConfig',
+    'biblioteca',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,16 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',  # Adiciona suporte ao django-filter
+        'rest_framework.filters.OrderingFilter',  # Permite ordenar os resultados
+        'rest_framework.filters.SearchFilter',   # Permite busca nos resultados
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',  # Configura paginação
+    'PAGE_SIZE': 5,  # Define o número padrão de resultados por página
+}
+
